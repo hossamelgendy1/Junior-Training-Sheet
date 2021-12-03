@@ -1,0 +1,59 @@
+// http://codeforces.com/contest/546/problem/C
+
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <algorithm>
+#include <queue>
+#include <stack>
+#include <set>
+#define ll   long long
+#define fast ios_base::sync_with_stdio(0); cin.tie(0);  cout.tie(0);
+//#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	fast;
+	int fights = 0;
+	short n, k1, k2;
+	cin >> n >> k1;
+	queue<short> q1, q2;
+	for (size_t i = 0; i < k1; i++)
+	{
+		int tmp;
+		cin >> tmp;
+		q1.push(tmp);
+	}
+	cin >> k2;
+	for (size_t i = 0; i < k2; i++)
+	{
+		int tmp;
+		cin >> tmp;
+		q2.push(tmp);
+	}
+	while (!q1.empty() && !q2.empty() && fights < 15 * n)
+	{
+		fights++;
+		if (q1.front() > q2.front())
+		{
+			q1.push(q2.front());
+			q1.push(q1.front());
+			q1.pop();
+			q2.pop();
+		}
+		else
+		{
+			q2.push(q1.front());
+			q2.push(q2.front());
+			q1.pop();
+			q2.pop();
+		}
+	}
+	if (q1.empty())
+		cout << fights << ' ' << 2;
+	else if (q2.empty())
+		cout << fights << ' ' << 1;
+	else
+		cout << -1;
+}

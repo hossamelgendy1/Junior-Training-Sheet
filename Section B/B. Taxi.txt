@@ -1,0 +1,33 @@
+//https://acm.timus.ru/problem.aspx?space=1&num=1607
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int a, b, c, d, fair = 0;
+	cin >> a >> b >> c >> d;
+	bool flag = true;
+	if (a > c)
+	{
+		fair = a;
+		flag = false;
+	}
+	while (flag)
+	{
+		if (a + b <= c)
+			a += b;
+		else
+		{
+			fair = c;
+			break;
+		}
+		if (c - d >= a)
+			c -= d;
+		else
+		{
+			fair = a;
+			break;
+		}
+	}
+	cout << fair;
+}

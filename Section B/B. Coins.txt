@@ -1,0 +1,45 @@
+// http://codeforces.com/contest/47/problem/B
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	string result1, result2, result3;
+	cin >> result1 >> result2 >> result3;
+	if (result1 == "A<B" || result1 == "B>A" || result2 == "A<B" || result2 == "B>A" || result3 == "A<B" || result3 == "B>A")
+	{
+		if (result2 == "B<C" || result2 == "C>B" || result1 == "B<C" || result1 == "C>B" || result3 == "B<C" || result3 == "C>B")
+		{
+			if (result3 == "A<C" || result3 == "C>A" || result2 == "A<C" || result2 == "C>A" || result1 == "A<C" || result1 == "C>A")
+				cout << "ABC";
+			else
+				cout << "Impossible";
+		}
+		else
+		{
+			if (result3 == "A<C" || result3 == "C>A" || result2 == "A<C" || result2 == "C>A" || result1 == "A<C" || result1 == "C>A")
+				cout << "ACB";
+			else
+				cout << "CAB";
+		}
+	}
+	else
+	{
+		if (result2 == "B<C" || result2 == "C>B" || result1 == "B<C" || result1 == "C>B" || result3 == "B<C" || result3 == "C>B")
+		{
+			if (result3 == "A<C" || result3 == "C>A" || result2 == "A<C" || result2 == "C>A" || result1 == "A<C" || result1 == "C>A")
+				cout << "BAC";
+			else
+				cout << "BCA";
+		}
+		else
+		{
+			if (result3 == "A<C" || result3 == "C>A" || result2 == "A<C" || result2 == "C>A" || result1 == "A<C" || result1 == "C>A")
+				cout << "Impossible";
+			else
+				cout << "CBA";
+		}
+	}
+}

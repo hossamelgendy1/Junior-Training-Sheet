@@ -1,0 +1,22 @@
+//https://codeforces.com/contest/148/problem/B
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	short vp, vd, f, bijous = 0;
+	int c;
+	double t, d, dp; // d = the distance from the cave at which the dragon will overtake the princess each time || dp = the distance from the cave that the princess would have taken before the dragon starts chasing her each time.
+	cin >> vp >> vd >> t >> f >> c;
+	dp = t * vp;
+	d = (vd * dp) / (vd - vp);
+	while (d < c && d >= 0)
+	{
+		bijous++;
+		t = (d / vd) + f; // the time that the dragon will take to return the bijou to the cave and start the chase again.
+		dp = d + (t * vp);
+		d = (vd * dp) / (vd - vp);
+	}
+	cout << bijous;
+}

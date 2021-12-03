@@ -1,0 +1,63 @@
+// https://codeforces.com/contest/515/problem/C
+
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <algorithm>
+#include <set>
+#define ll   long long
+#define fast ios_base::sync_with_stdio(0); cin.tie(0);  cout.tie(0);
+//#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	fast;
+	string a;
+	short n;
+	cin >> n >> a;
+	multiset<int> x;
+	for (size_t i = 0; i < n; i++)
+	{
+		switch (a[i])
+		{
+		case '2':
+			x.emplace(2);
+			break;
+		case '3':
+			x.emplace(3);
+			break;
+		case '4':
+			x.emplace(3);
+			x.emplace(2);
+			x.emplace(2);
+			break;
+		case '5':
+			x.emplace(5);
+			break;
+		case '6':
+			x.emplace(5);
+			x.emplace(3);
+			break;
+		case '7':
+			x.emplace(7);
+			break;
+		case '8':
+			x.emplace(7);
+			x.emplace(2);
+			x.emplace(2);
+			x.emplace(2);
+			break;
+		case '9':
+			x.emplace(7);
+			x.emplace(3);
+			x.emplace(3);
+			x.emplace(2);
+			break;
+		default:
+			break;
+		}
+	}
+	for (multiset<int>::reverse_iterator it = x.rbegin(); it != x.rend(); it++)
+		cout << *it;
+}

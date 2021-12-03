@@ -1,0 +1,39 @@
+//http://codeforces.com/contest/520/problem/B
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int n, m;
+	cin >> n >> m;
+	if (m <= n)
+	{
+		cout << n - m;
+	}
+	else
+	{
+		double tmp;
+		int count = 0;
+		while (n != m)
+		{
+			tmp = m;
+			while (tmp > n)
+			{
+				tmp /= 2;
+			}
+			int divided = (int(tmp) < tmp) ? int(tmp) + 1 : int(tmp);
+			while (n > divided)
+			{
+				n--;
+				count++;
+			}
+			if (n != m)
+			{
+				n *= 2;
+				count++;
+			}
+		}
+		cout << count;
+	}
+}
