@@ -1,0 +1,71 @@
+
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <algorithm>
+#include <queue>
+#include <stack>
+#include <set>
+#include <regex>
+#define ll   long long
+#define fast ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define all(v) v.begin(),v.end()
+#define rall(v) v.rbegin(),v.rend()
+//#include<bits/stdc++.h>
+using namespace std;
+
+void solve()
+{
+    int n,m;
+    char c;
+    cin >> n >> m >> c;
+    char** mat = new char* [n];
+    for (int i = 0; i < n; ++i) {
+        mat[i] = new char[m];
+        for (int j = 0; j < m; ++j) {
+            cin >> mat[i][j];
+        }
+    }
+    bool charExists[26];
+    for (int k = 0; k < 26; ++k) {
+        charExists[k] = false;
+    }
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            if (mat[i][j] == c)
+            {
+                if(i-1 >= 0)
+                    if(mat[i-1][j] != '.' && mat[i-1][j] != c)
+                        charExists[mat[i-1][j] - 65] = true;
+                if (j-1 >= 0)
+                    if(mat[i][j-1] != '.' && mat[i][j-1] != c)
+                        charExists[mat[i][j-1] - 65] = true;
+                if (i+1 < n)
+                    if(mat[i+1][j] != '.' && mat[i+1][j] != c)
+                        charExists[mat[i+1][j] - 65] = true;
+                if (j+1 < m)
+                    if(mat[i][j+1] != '.' && mat[i][j+1] != c)
+                        charExists[mat[i][j+1] - 65] = true;
+            }
+        }
+    }
+    int count = 0;
+    for (int l = 0; l < 26; ++l) {
+        if (charExists[l])
+            count++;
+    }
+    cout << count;
+}
+
+int main()
+{
+    fast;
+    //freopen("window.in","r",stdin);
+    //freopen("output.txt","w",stdout);
+    int t = 1;
+    //cin >> t;
+    while (t--)
+    {
+        solve(); cout << '\n';
+    }
+}
