@@ -1,0 +1,38 @@
+
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <algorithm>
+#include <queue>
+#include <stack>
+#include <set>
+#include <regex>
+#define ll   long long
+#define fast ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define all(v) v.begin(),v.end()
+#define rall(v) v.rbegin(),v.rend()
+//#include<bits/stdc++.h>
+using namespace std;
+
+void solve()
+{
+    string s;
+    cin >> s;
+    cout << s;
+    for (int i = s.length() - 1; i >= 0; --i) {
+        cout << s[i];
+    }
+}
+
+int main()
+{
+    fast;
+    //freopen("window.in","r",stdin);
+    //freopen("output.txt","w",stdout);
+    int t = 1;
+    //cin >> t;
+    while (t--)
+    {
+        solve(); cout << '\n';
+    }
+}
