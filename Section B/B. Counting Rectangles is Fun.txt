@@ -1,0 +1,199 @@
+/*
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <algorithm>
+#include <queue>
+#include <stack>
+#include <set>
+#include <regex>
+#define ll   long long
+#define fast ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define all(v) v.begin(),v.end()
+#define rall(v) v.rbegin(),v.rend()
+//#include<bits/stdc++.h>
+using namespace std;
+
+int countRectangles(short** arr, int x1, int y1, int x2, int y2)
+{
+    int** dp_arr = new int* [x2 + 1];
+    for (int i = 0; i <= x2; ++i) {
+        dp_arr[i] = new int[y2 + 1];
+        for (int j = 0; j <= y2; ++j) {
+            if (i < x1 || j < y1)
+                dp_arr[i][j] = 0;
+            else
+            {
+                dp_arr[i][j] = dp_arr[i - 1][j] + dp_arr[i][j - 1] - dp_arr[i - 1][j - 1];
+                int min_y = 0;
+                for (int k = i; k >= x1; --k) {
+                    for (int l = j; l >= y1; --l) {
+                        if (arr[k][l] == 0 && l > min_y)
+                            dp_arr[i][j]++;
+                        else
+                        {
+                            min_y = l;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return dp_arr[x2][y2];
+    for (int i = 0; i <= x2; ++i) {
+        delete[] dp_arr[i];
+    }
+    delete[] dp_arr;
+}
+
+int dp_arr[41][41];
+
+int countRectangles(short** arr, int x1, int y1, int x2, int y2)
+{
+    for (int i = 0; i <= x2; ++i) {
+        for (int j = 0; j <= y2; ++j) {
+            if (i < x1 || j < y1)
+                dp_arr[i][j] = 0;
+            else
+            {
+                dp_arr[i][j] = dp_arr[i - 1][j] + dp_arr[i][j - 1] - dp_arr[i - 1][j - 1];
+                int min_y = 0;
+                for (int k = i; k >= x1; --k) {
+                    for (int l = j; l >= y1; --l) {
+                        if (arr[k][l] == 0 && l > min_y)
+                            dp_arr[i][j]++;
+                        else
+                        {
+                            min_y = l;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return dp_arr[x2][y2];
+}
+
+void solve()
+{
+    int n, m, q;
+    cin >> n >> m >> q;
+    short** arr = new short* [n + 1];
+    string s;
+    for (int i = 1; i <= n; ++i) {
+        arr[i] = new short[m + 1];
+        cin >> s;
+        for (int j = 1; j <= m; ++j) {
+            arr[i][j] = s[j-1] - 48;
+        }
+    }
+    int a, b, c, d;
+    for (int k = 0; k < q; ++k) {
+        cin >> a >> b >> c >> d;
+        cout << countRectangles(arr, a, b, c, d) << '\n';
+    }
+}
+
+int main()
+{
+    fast;
+    //freopen("window.in","r",stdin);
+    //freopen("output.txt","w",stdout);
+    int t = 1;
+    //cin >> t;
+    while (t--)
+    {
+        solve(); cout << '\n';
+    }
+}
+*/
+
+
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <algorithm>
+#include <queue>
+#include <stack>
+#include <set>
+#include <regex>
+#define ll   long long
+#define fast ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define all(v) v.begin(),v.end()
+#define rall(v) v.rbegin(),v.rend()
+//#include<bits/stdc++.h>
+using namespace std;
+
+int**** dp_arr;
+
+void create_dp_arrays(short** arr,int n, int m)
+{
+    dp_arr = new int*** [n+1];
+    for (int x = 1; x <= n; x++)
+    {
+        dp_arr[x] = new int** [m+1];
+        for (int y = 1; y <= m; y++)
+        {
+            dp_arr[x][y] = new int* [n+1];
+            for (int i = 0; i <= n; ++i) {
+                dp_arr[x][y][i] = new int[m+1];
+                for (int j = 0; j <= m; ++j) {
+                    if (i < x || j < y)
+                        dp_arr[x][y][i][j] = 0;
+                    else
+                    {
+                        dp_arr[x][y][i][j] = dp_arr[x][y][i - 1][j] + dp_arr[x][y][i][j - 1] - dp_arr[x][y][i - 1][j - 1];
+                        int min_y = 0;
+                        for (int k = i; k >= x; --k) {
+                            for (int l = j; l >= y; --l) {
+                                if (arr[k][l] == 0 && l > min_y)
+                                    dp_arr[x][y][i][j]++;
+                                else
+                                {
+                                    min_y = l;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+void solve()
+{
+    int n, m, q;
+    cin >> n >> m >> q;
+    short** arr = new short* [n + 1];
+    string s;
+    for (int i = 1; i <= n; ++i) {
+        arr[i] = new short[m + 1];
+        cin >> s;
+        for (int j = 1; j <= m; ++j) {
+            arr[i][j] = s[j - 1] - 48;
+        }
+    }
+    create_dp_arrays(arr, n, m);
+    int a, b, c, d;
+    for (int k = 0; k < q; ++k) {
+        cin >> a >> b >> c >> d;
+        cout << dp_arr[a][b][c][d] << '\n';
+    }
+}
+
+int main()
+{
+    fast;
+    //freopen("window.in","r",stdin);
+    //freopen("output.txt","w",stdout);
+    int t = 1;
+    //cin >> t;
+    while (t--)
+    {
+        solve(); cout << '\n';
+    }
+}
